@@ -1,9 +1,9 @@
 # FULL STACK SHOP APPLICATION
 
-##  Project Overview
-A complete e-commerce application with product management API using Spring Boot and React.
+## Project Overview
+Admin Product Management System with Spring Boot Backend and React Frontend.
 
-##  Tech Stack
+## Tech Stack
 
 ### Backend
 - Java 21
@@ -27,9 +27,13 @@ A complete e-commerce application with product management API using Spring Boot 
 - Global exception handling
 - CreatedAt and UpdatedAt timestamps
 
-## Project Structure
+### Frontend
+- Add, Edit, Delete, View, and Search Products
+- Responsive grid layout
+- Alert messages for validation
 
--FULL-STACK-SHOP/
+## Project Structure
+FULL-STACK-SHOP/
 ├── backend/ # Spring Boot Application
 └── frontend/ # React Application
 
@@ -42,14 +46,13 @@ A complete e-commerce application with product management API using Spring Boot 
 - Node.js
 
 ### 1. Setup Database
-```sql
--CREATE DATABASE shop_db;
+--sql
+CREATE DATABASE shop_db;
 
-### 2. Configure Backend
+## 2. Configure Backend
 Update backend/src/main/resources/application.properties with your MySQL password
 
-## 3. Run Backend
-cd backend
+## 3. Run Backendcd backend
 mvn spring-boot:run
 
 ## 4. Run Frontend
@@ -67,7 +70,9 @@ PUT	/api/products/{id}	Update product
 DELETE	/api/products/{id}	Delete product
 GET	/api/products/search?name=	Search products
 
+
 ## Links
 GitHub: https://github.com/Kavita-Musundi
 
 LinkedIn: https://linkedin.com/in/kavita-musundi-762379343
+
