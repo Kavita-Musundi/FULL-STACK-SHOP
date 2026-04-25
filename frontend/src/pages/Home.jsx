@@ -76,7 +76,11 @@ function Home() {
             setDescription('');
             loadProducts();
         } catch (error) {
-            if (error.response && error.response.data) {
+            if (error.response && error.response.status === 401) {
+                alert('Session expired. Please login again.');
+                localStorage.removeItem('auth');
+                window.location.reload();
+            } else if (error.response && error.response.data) {
                 const errors = error.response.data;
                 for (let key in errors) {
                     alert(errors[key]);
@@ -102,7 +106,13 @@ function Home() {
                 alert('Product deleted successfully!');
                 loadProducts();
             } catch (error) {
-                alert('Failed to delete product');
+                if (error.response && error.response.status === 401) {
+                    alert('Session expired. Please login again.');
+                    localStorage.removeItem('auth');
+                    window.location.reload();
+                } else {
+                    alert('Failed to delete product');
+                }
             }
         }
     };
@@ -136,9 +146,17 @@ function Home() {
         setDescription('');
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('auth');
+        window.location.reload();
+    };
+
     return (
         <div className="main-container">
-            <h1 className="page-title">Shop</h1>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h1 className="page-title">Shop</h1>
+                <button onClick={handleLogout} className="logout-btn">Logout</button>
+            </div>
             
             <SearchBar 
                 searchTerm={searchTerm}

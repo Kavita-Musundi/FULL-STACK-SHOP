@@ -1,10 +1,34 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/products';
+const API = 'http://localhost:8080/api/products';
 
-export const getProducts = () => axios.get(API_URL);
-export const getProduct = (id) => axios.get(`${API_URL}/${id}`);
-export const createProduct = (data) => axios.post(API_URL, data);
-export const updateProduct = (id, data) => axios.put(`${API_URL}/${id}`, data);
-export const deleteProduct = (id) => axios.delete(`${API_URL}/${id}`);
-export const searchProducts = (name) => axios.get(`${API_URL}/search?name=${name}`);
+// Get auth token from localStorage
+const getAuth = () => {
+    const auth = localStorage.getItem('auth');
+    if (auth) {
+        return { Authorization: `Basic ${auth}` };
+    }
+    return {};
+};
+
+// Create axios instance
+const api = axios.create({
+    baseURL: API,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+});
+
+// Add auth header to every request
+api.interceptors.request.use((config) => {
+    const authHeader = getAuth();
+    config.headers = { ...config.headers, ...authHeader };
+    return config;
+});
+
+export const getProducts = () => api.get();
+export const getProduct = (id) => api.get(`/${id}`);
+export const createProduct = (data) => api.post('/', data);
+export const updateProduct = (id, data) => api.put(`/${id}`, data);
+export const deleteProduct = (id) => api.delete(`/${id}`);
+export const searchProducts = (name) => api.get(`/search?name=${name}`);

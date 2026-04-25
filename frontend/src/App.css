@@ -261,3 +261,15 @@ body {
 .delete-btn:hover {
     background-color: #c53030;
 }
+.logout-btn {
+    padding: 8px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
